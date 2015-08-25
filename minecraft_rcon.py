@@ -23,15 +23,13 @@ def main():
         clear_str = 'clear'
 
     parser = argparse.ArgumentParser(description="Send commands to a remote Minecraft console")
-    parser.add_argument('-h','--ip',help="IP address of the server",required=True)
+    parser.add_argument('-ip','--host',help="IP address of the server",required=True)
     parser.add_argument('-p','--port',help="Port for RCON on the server",required=True)
 
     args = parser.parse_args()
+    pw = getpass.getpass()
 
-    if not args.password:
-        pw = getpass.getpass()
-
-    rcon = MCRcon(args.ip,int(args.port),pw)
+    rcon = MCRcon(args.host,int(args.port),pw)
 
     print("Type 'cls' or 'clear' to clear the screen")
     print("Type 'exit' or 'quit' or cntrl-c to exit")
