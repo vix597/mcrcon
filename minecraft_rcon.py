@@ -14,6 +14,7 @@ import getpass
 import sys
 import os
 import platform
+import readline
 from mcrcon import MCRcon
 
 def main():
@@ -36,7 +37,7 @@ def main():
 
     while 1:
         try:
-            cmd = str(input('Remote Console>> '))
+            cmd = input('Remote Console>> ')
             if cmd.strip().lower() in ['cls', 'clear']:
                 os.system(clear_str)
             elif cmd.strip().lower() in ['exit', 'quit']:
@@ -47,7 +48,6 @@ def main():
             else:
                 print(rcon.send(cmd))
         except EOFError:
-            print("ctrl-d detected, exiting...")
             exit(0)
 
 if __name__=="__main__":

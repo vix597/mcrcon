@@ -34,7 +34,7 @@ class MCRcon(object):
         self.send_real(self.password,self.AUTH)
 
     def send(self,cmd):
-        return self.send_real(cmd,self.RUN_COMMAND)
+        return self.send_real(cmd,self.RUN_COMMAND).decode('utf-8')
 
     def send_real(self,cmd,cmd_type):
         packet = None
