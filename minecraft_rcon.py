@@ -46,8 +46,11 @@ def main():
             elif cmd.strip() == "":
                 pass
             else:
-                print(rcon.send(cmd))
+                out = rcon.send(cmd)
+                for line in out.split('\n'):
+                    print(line)
         except EOFError:
+            print()
             exit(0)
 
 if __name__=="__main__":
