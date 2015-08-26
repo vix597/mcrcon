@@ -47,8 +47,9 @@ def main():
                 pass
             else:
                 msg = rcon.send(cmd)
-                for line in msg.split('/'):
-                    print(line)
+                #for line in msg.split('/'):
+                #   print(line)
+                print(msg)
         except EOFError:
             print()
             exit(0)
