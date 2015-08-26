@@ -34,7 +34,7 @@ class MCRcon(object):
         self.send_real(self.password,self.AUTH)
 
     def send(self,cmd):
-        return self.send_real(cmd,self.RUN_COMMAND).decode('utf-8')
+        return self.send_real(cmd,self.RUN_COMMAND)
 
     def send_real(self,cmd,cmd_type):
         packet = None
@@ -48,7 +48,7 @@ class MCRcon(object):
         self.sock.send(packet)
 
         more_data = True
-        ret_data = ""
+        ret_data = b""
         while more_data:
             length, req_id, cmd_type = struct.unpack('<iii',self.sock.recv(12))
             data = self.sock.recv(length-8)
@@ -58,10 +58,10 @@ class MCRcon(object):
             elif data[-2:] != b'\x00\x00':
                 raise Exception('Protocol failure', 'non-null pad bytes')
 
-            ret_data += str(data[:-2])
+            ret_data += data[:-2]
 
             more_data = select.select([self.sock], [], [],0)[0]
-        return ret_data
+        return ret_data.decode('utf-8')
 
     def close(self):
         self.sock.close()
