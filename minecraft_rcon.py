@@ -46,9 +46,7 @@ def main():
             elif cmd.strip() == "":
                 pass
             else:
-                out = rcon.send(cmd)
-                for line in out.split('\n'):
-                    print(line)
+                print(rcon.send(cmd))
         except EOFError:
             print()
             exit(0)

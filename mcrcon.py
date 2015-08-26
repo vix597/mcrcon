@@ -58,6 +58,7 @@ class MCRcon(object):
             elif data[-2:] != b'\x00\x00':
                 raise Exception('Protocol failure', 'non-null pad bytes')
 
+            print("DEBUG: data is\n============================\n",data,"\n==============================\n")
             ret_data += data[:-2]
 
             more_data = select.select([self.sock], [], [],0)[0]
